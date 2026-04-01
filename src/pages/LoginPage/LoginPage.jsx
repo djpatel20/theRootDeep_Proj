@@ -4,12 +4,12 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./LoginPage.module.css";
 export default function LoginPage() {
   const { login } = useAuth();
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
-  const [email,    setEmail]    = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error,    setError]    = useState("");
-  const [loading,  setLoading]  = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
 
   async function handleSubmit(e) {
@@ -24,7 +24,7 @@ export default function LoginPage() {
     setLoading(false);
 
     if (result.success) {
-      navigate("/admin/upload");
+      navigate("/upload");
     } else {
       setError(result.error);
     }
@@ -40,12 +40,29 @@ export default function LoginPage() {
         {/* Brand mark */}
         <div className={styles.loginBrand}>
           <div className={styles.brandIcon}>
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="2.5"/>
-              <path d="M20 8 C20 8 12 14 12 22 C12 27.5 15.5 31 20 31 C24.5 31 28 27.5 28 22 C28 14 20 8 20 8Z"
-                fill="currentColor" opacity="0.15"/>
-              <path d="M20 12 L20 30 M14 18 C14 18 17 20 20 20 C23 20 26 18 26 18"
-                stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            <svg
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="20"
+                cy="20"
+                r="18"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              />
+              <path
+                d="M20 8 C20 8 12 14 12 22 C12 27.5 15.5 31 20 31 C24.5 31 28 27.5 28 22 C28 14 20 8 20 8Z"
+                fill="currentColor"
+                opacity="0.15"
+              />
+              <path
+                d="M20 12 L20 30 M14 18 C14 18 17 20 20 20 C23 20 26 18 26 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
             </svg>
           </div>
           <div>
@@ -57,13 +74,17 @@ export default function LoginPage() {
         <div className={styles.loginDivider} />
 
         <h2 className={styles.loginHeading}>Admin Sign In</h2>
-        <p className={styles.loginSub}>Access restricted to authorised administrators only.</p>
+        <p className={styles.loginSub}>
+          Access restricted to authorised administrators only.
+        </p>
 
         <form className={styles.loginForm} onSubmit={handleSubmit} noValidate>
           <div className={styles.fieldGroup}>
             <label htmlFor="email">Email Address</label>
             <div className={styles.inputWrap}>
-              <span className={`material-symbols-outlined ${styles.inputIcon}`}>mail</span>
+              <span className={`material-symbols-outlined ${styles.inputIcon}`}>
+                mail
+              </span>
               <input
                 id="email"
                 type="email"
@@ -79,7 +100,9 @@ export default function LoginPage() {
           <div className={styles.fieldGroup}>
             <label htmlFor="password">Password</label>
             <div className={styles.inputWrap}>
-              <span className={`material-symbols-outlined ${styles.inputIcon}`}>lock</span>
+              <span className={`material-symbols-outlined ${styles.inputIcon}`}>
+                lock
+              </span>
               <input
                 id="password"
                 type={showPass ? "text" : "password"}
