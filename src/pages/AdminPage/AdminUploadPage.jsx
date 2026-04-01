@@ -206,46 +206,46 @@ export default function AdminUploadPage() {
             </svg>
           </div>
           <div>
-            <span className="au-logo-name">The Root Deep</span>
-            <span className="au-logo-tag">Admin Panel</span>
+            <span className={styles.auLogoName}>The Root Deep</span>
+            <span className={styles.auLogoTag}>Admin Panel</span>
           </div>
         </div>
 
-        <nav className="au-nav">
+        <nav className={styles.auNav}>
           {TABS.map((tab) => (
             <button
               key={tab.id}
-              className={`au-nav-item ${activeTab === tab.id ? "active" : ""}`}
+              className={`${styles.auNavItem} ${activeTab === tab.id ? styles.active : ""}`}
               onClick={() => setActiveTab(tab.id)}
             >
               <span className="material-symbols-outlined">{tab.icon}</span>
               {tab.label}
               {uploads[tab.id].length > 0 && (
-                <span className="au-badge">{uploads[tab.id].length}</span>
+                <span className={styles.auBadge}>{uploads[tab.id].length}</span>
               )}
             </button>
           ))}
         </nav>
 
-        <button className="au-logout" onClick={handleLogout}>
+        <button className={styles.auLogout} onClick={handleLogout}>
           <span className="material-symbols-outlined">logout</span>
           Sign Out
         </button>
       </aside>
 
       {/* ── Main ── */}
-      <main className="au-main">
+      <main className={styles.auMain}>
         {/* Header */}
-        <header className="au-header">
+        <header className={styles.auHeader}>
           <div>
-            <h1 className="au-page-title">
+            <h1 className={styles.auPageTitle}>
               {TABS.find((t) => t.id === activeTab)?.label} Upload
             </h1>
-            <p className="au-page-sub">
+            <p className={styles.auPageSub}>
               Manage and publish content for your training portal
             </p>
           </div>
-          <div className="au-header-badge">
+          <div className={styles.auHeaderBadge}>
             <span className="material-symbols-outlined">admin_panel_settings</span>
             Admin
           </div>
@@ -253,15 +253,15 @@ export default function AdminUploadPage() {
 
         {/* ── VIDEO TAB ── */}
         {activeTab === "video" && (
-          <div className="au-content">
-            <section className="au-card">
-              <h2 className="au-card-title">
+          <div className={styles.auContent}>
+            <section className={styles.auCard}>
+              <h2 className={styles.auCardTitle}>
                 <span className="material-symbols-outlined">upload</span>
                 Upload New Video
               </h2>
-              <form className="au-form" onSubmit={handleVideoSubmit}>
-                <div className="au-row-2">
-                  <div className="au-field">
+              <form className={styles.auForm} onSubmit={handleVideoSubmit}>
+                <div className={styles.auRow2}>
+                  <div className={styles.auField}>
                     <label>Video Title *</label>
                     <input
                       type="text"
@@ -270,7 +270,7 @@ export default function AdminUploadPage() {
                       onChange={(e) => setVideoForm((f) => ({ ...f, title: e.target.value }))}
                     />
                   </div>
-                  <div className="au-field">
+                  <div className={styles.auField}>
                     <label>Category</label>
                     <select
                       value={videoForm.category}
@@ -293,16 +293,16 @@ export default function AdminUploadPage() {
                     onChange={(e) => setVideoForm((f) => ({ ...f, description: e.target.value }))}
                   />
                 </div>
-                <div className="au-field">
+                <div className={styles.auField}>
                   <label>Video File *</label>
-                  <div className="au-dropzone" onClick={() => videoRef.current?.click()}>
-                    <span className="material-symbols-outlined au-dz-icon">video_file</span>
-                    <p className="au-dz-text">
+                  <div className={styles.auDropzone} onClick={() => videoRef.current?.click()}>
+                    <span className={`material-symbols-outlined ${styles.auDzIcon}`}>video_file</span>
+                    <p className={styles.auDzText}>
                       {videoForm.file
                         ? videoForm.file.name
                         : "Click to select or drag & drop a video file"}
                     </p>
-                    <p className="au-dz-hint">MP4, MOV, AVI — up to 2 GB</p>
+                    <p className={styles.auDzHint}>MP4, MOV, AVI — up to 2 GB</p>
                     <input
                       ref={videoRef}
                       type="file"
@@ -312,7 +312,7 @@ export default function AdminUploadPage() {
                     />
                   </div>
                 </div>
-                <div className="au-form-actions">
+                <div className={styles.auFormActions}>
                   <button type="submit" className={styles.auBtnPrimary}>
                     <span className="material-symbols-outlined">cloud_upload</span>
                     Upload Video
@@ -323,26 +323,26 @@ export default function AdminUploadPage() {
 
             {/* Uploaded videos list */}
             {uploads.video.length > 0 && (
-              <section className="au-card">
-                <h2 className="au-card-title">
+              <section className={styles.auCard}>
+                <h2 className={styles.auCardTitle}>
                   <span className="material-symbols-outlined">video_library</span>
                   Uploaded Videos ({uploads.video.length})
                 </h2>
-                <div className="au-list">
+                <div className={styles.auList}>
                   {uploads.video.map((v) => (
-                    <div className="au-list-item" key={v.id}>
-                      <div className="au-list-icon video">
+                    <div className={styles.auListItem} key={v.id}>
+                      <div className={`${styles.auListIcon} ${styles.video}`}>
                         <span className="material-symbols-outlined">play_circle</span>
                       </div>
-                      <div className="au-list-info">
-                        <span className="au-list-name">{v.title}</span>
-                        <span className="au-list-meta">
+                      <div className={styles.auListInfo}>
+                        <span className={styles.auListName}>{v.title}</span>
+                        <span className={styles.auListMeta}>
                           {v.fileName} · {v.size}
                           {v.category && ` · ${v.category}`}
                           {` · ${v.uploadedAt}`}
                         </span>
                       </div>
-                      <button className="au-delete" onClick={() => deleteItem("video", v.id)}>
+                      <button className={styles.auDelete} onClick={() => deleteItem("video", v.id)}>
                         <span className="material-symbols-outlined">delete</span>
                       </button>
                     </div>
@@ -355,14 +355,14 @@ export default function AdminUploadPage() {
 
         {/* ── QUIZ TAB ── */}
         {activeTab === "quiz" && (
-          <div className="au-content">
-            <section className="au-card">
-              <h2 className="au-card-title">
+          <div className={styles.auContent}>
+            <section className={styles.auCard}>
+              <h2 className={styles.auCardTitle}>
                 <span className="material-symbols-outlined">upload</span>
                 Create New Quiz
               </h2>
-              <form className="au-form" onSubmit={handleQuizSubmit}>
-                <div className="au-field">
+              <form className={styles.auForm} onSubmit={handleQuizSubmit}>
+                <div className={styles.auField}>
                   <label>Quiz Title *</label>
                   <input
                     type="text"
@@ -373,9 +373,9 @@ export default function AdminUploadPage() {
                 </div>
 
                 {quizForm.questions.map((q, qi) => (
-                  <div className="au-quiz-question" key={qi}>
-                    <div className="au-quiz-q-header">
-                      <span className="au-quiz-q-num">Q{qi + 1}</span>
+                  <div className={styles.auQuizQuestion} key={qi}>
+                    <div className={styles.auQuizQHeader}>
+                      <span className={styles.auQuizQNum}>Q{qi + 1}</span>
                       {quizForm.questions.length > 1 && (
                         <button
                           type="button"
@@ -395,17 +395,17 @@ export default function AdminUploadPage() {
                         onChange={(e) => updateQuestion(qi, "question", e.target.value)}
                       />
                     </div>
-                    <div className="au-options-grid">
+                    <div className={styles.auOptionsGrid}>
                       {q.options.map((opt, oi) => (
-                        <div className="au-option-wrap" key={oi}>
-                          <label className="au-option-label">
+                        <div className={styles.auOptionWrap} key={oi}>
+                          <label className={styles.auOptionLabel}>
                             <input
                               type="radio"
                               name={`correct-${qi}`}
                               checked={q.correct === oi}
                               onChange={() => updateQuestion(qi, "correct", oi)}
                             />
-                            <span className="au-option-letter">
+                            <span className={styles.auOptionLetter}>
                               {["A", "B", "C", "D"][oi]}
                             </span>
                           </label>
@@ -414,12 +414,12 @@ export default function AdminUploadPage() {
                             placeholder={`Option ${["A","B","C","D"][oi]}`}
                             value={opt}
                             onChange={(e) => updateOption(qi, oi, e.target.value)}
-                            className="au-option-input"
+                            className={styles.auOptionInput}
                           />
                         </div>
                       ))}
                     </div>
-                    <p className="au-quiz-hint">
+                    <p className={styles.auQuizHint}>
                       <span className="material-symbols-outlined" style={{fontSize:"14px",verticalAlign:"middle"}}>info</span>
                       {" "}Select the radio button next to the correct answer.
                     </p>
@@ -450,7 +450,7 @@ export default function AdminUploadPage() {
                 <div className={styles.auList}>
                   {uploads.quiz.map((q) => (
                     <div className={styles.auListItem} key={q.id}>
-                      <div className="au-list-icon quiz">
+                      <div className={`${styles.auListIcon} ${styles.quiz}`}>
                         <span className="material-symbols-outlined">quiz</span>
                       </div>
                       <div className="au-list-info">
@@ -459,7 +459,7 @@ export default function AdminUploadPage() {
                           {q.questions} question{q.questions !== 1 ? "s" : ""} · {q.uploadedAt}
                         </span>
                       </div>
-                      <button className="au-delete" onClick={() => deleteItem("quiz", q.id)}>
+                      <button className={styles.auDelete} onClick={() => deleteItem("quiz", q.id)}>
                         <span className="material-symbols-outlined">delete</span>
                       </button>
                     </div>
@@ -472,8 +472,8 @@ export default function AdminUploadPage() {
 
         {/* ── IMAGE TAB ── */}
         {activeTab === "image" && (
-          <div className="au-content">
-            <section className="au-card">
+          <div className={styles.auContent}>
+            <section className={styles.auCard}>
               <h2 className={styles.auCardTitle}>
                 <span className="material-symbols-outlined">upload</span>
                 Upload New Image
@@ -507,7 +507,7 @@ export default function AdminUploadPage() {
                 <div className="au-field">
                   <label>Image File *</label>
                   <div
-                    className="au-dropzone"
+                    className={styles.auDropzone}
                     onClick={() => imageRef.current?.click()}
                     style={imageForm.preview ? { padding: "12px" } : {}}
                   >
@@ -515,13 +515,13 @@ export default function AdminUploadPage() {
                       <img
                         src={imageForm.preview}
                         alt="Preview"
-                        className="au-image-preview"
+                        className={styles.auImagePreview}
                       />
                     ) : (
                       <>
-                        <span className="material-symbols-outlined au-dz-icon">add_photo_alternate</span>
-                        <p className="au-dz-text">Click to select an image</p>
-                        <p className="au-dz-hint">JPG, PNG, WEBP — up to 10 MB</p>
+                        <span className={`material-symbols-outlined ${styles.auDzIcon}`}>add_photo_alternate</span>
+                        <p className={styles.auDzText}>Click to select an image</p>
+                        <p className={styles.auDzHint}>JPG, PNG, WEBP — up to 10 MB</p>
                       </>
                     )}
                     <input
@@ -534,8 +534,8 @@ export default function AdminUploadPage() {
                   </div>
                 </div>
 
-                <div className="au-form-actions">
-                  <button type="submit" className="au-btn-primary">
+                <div className={styles.auFormActions}>
+                  <button type="submit" className={styles.auBtnPrimary}>
                     <span className="material-symbols-outlined">cloud_upload</span>
                     Upload Image
                   </button>
@@ -545,21 +545,21 @@ export default function AdminUploadPage() {
 
             {/* Image gallery */}
             {uploads.image.length > 0 && (
-              <section className="au-card">
-                <h2 className="au-card-title">
+              <section className={styles.auCard}>
+                <h2 className={styles.auCardTitle}>
                   <span className="material-symbols-outlined">photo_library</span>
                   Image Library ({uploads.image.length})
                 </h2>
-                <div className="au-image-grid">
+                <div className={styles.auImageGrid}>
                   {uploads.image.map((img) => (
-                    <div className="au-image-tile" key={img.id}>
-                      <img src={img.preview} alt={img.title} className="au-tile-img" />
-                      <div className="au-tile-info">
-                        <span className="au-tile-title">{img.title}</span>
-                        {img.tag && <span className="au-tile-tag">{img.tag}</span>}
+                    <div className={styles.auImageTile} key={img.id}>
+                      <img src={img.preview} alt={img.title} className={styles.auTileImg} />
+                      <div className={styles.auTileInfo}>
+                        <span className={styles.auTileTitle}>{img.title}</span>
+                        {img.tag && <span className={styles.auTileTag}>{img.tag}</span>}
                       </div>
                       <button
-                        className="au-tile-delete"
+                        className={styles.auTileDelete}
                         onClick={() => deleteItem("image", img.id)}
                       >
                         <span className="material-symbols-outlined">delete</span>
@@ -575,7 +575,7 @@ export default function AdminUploadPage() {
 
       {/* ── Toast notification ── */}
       {toast && (
-        <div className={`au-toast au-toast-${toast.type}`}>
+        <div className={`${styles.auToast} ${styles["auToast" + toast.type.charAt(0).toUpperCase() + toast.type.slice(1)]}`}>
           <span className="material-symbols-outlined">
             {toast.type === "success" ? "check_circle" : toast.type === "error" ? "error" : "info"}
           </span>
